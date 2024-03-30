@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>點哥團夠讚</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <h1><i class="fas fa-star"></i> 歡迎來到點哥團夠讚!</h1>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <img src="https://lh6.googleusercontent.com/Aa4WSTow59sUn04JAwTjIZh_JeUOVHO3z9HOC-B08bAhI4NXj0WbIzLQxrzjziSe6vqsl1keGSUPVLYWJ1tahYBDFfB4CKik9txoayozRzkz4i8LTP_Z8Sg3-rWRxAX6hw=w1280" alt="點哥團夠讚" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <p>這工具適合誰</p>
+                <ul>
+                    <li>美容美髮，房仲顧問，保險顧問，直銷，團購，專業人員，行銷企劃 ......</li>
+                    <li>任何需要行銷服務的個人或中小企業，都適合來使用這套系統，優化您的LINE專業帳號！</li>
+                    <li>還不來了解嗎?!</li>
+                </ul>
+                <a href="https://go.ckone.tv" class="btn btn-primary">點哥團夠讚</a>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <h2>來跟我打個招呼吧!</h2>
+                <div class="input-group mb-3">
+                    <input type="text" id="nameInput" placeholder="請輸入你的名字" class="form-control">
+                    <div class="input-group-append">
+                        <button onclick="greetUser()" class="btn btn-success">打招呼</button>
+                    </div>
+                </div>
+                <p id="greeting" class="lead"></p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <p><i class="far fa-clock"></i> 當前時間: <span id="currentTime"></span></p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div id="game">
+                    <h2>猜數字遊戲</h2>
+                    <p>我已經想好了一個 1 到 100 之間的數字。你能猜對嗎?</p>
+                    <div class="input-group mb-3">
+                        <input type="number" id="guessInput" placeholder="輸入你的猜測" class="form-control">
+                        <div class="input-group-append">
+                            <button onclick="checkGuess()" class="btn btn-primary">猜!</button>
+                        </div>
+                    </div>
+                    <p id="result"></p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+                <p>關注我們:</p>
+                <a href="https://www.facebook.com/thinkclue" target="_blank"><i class="fab fa-facebook fa-2x mx-2"></i></a>
+                <a href="https://www.facebook.com/scratch.tainan" target="_blank"><i class="fab fa-twitter fa-2x mx-2"></i></a>
+                <a href="https://www.instagram.com/think_clue/" target="_blank"><i class="fab fa-instagram fa-2x mx-2"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function greetUser() {
+            var name = $('#nameInput').val();
+            var greeting = $('#greeting');
+            
+            if (name) {
+                greeting.text('你好, ' + name + '!歡迎來到點哥團夠讚網頁。');
+            } else {
+                greeting.text('請輸入你的名字。');
+            }
+        }
+
+        function showCurrentTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            
+            var timeString = hours + ':' + minutes + ':' + seconds;
+            $('#currentTime').text(timeString);
+        }
+
+        setInterval(showCurrentTime, 1000);
+
+        var targetNumber = Math.floor(Math.random() * 100) + 1;
+        var attempts = 0;
+
+        function checkGuess() {
+            var userGuess = parseInt($('#guessInput').val());
+            attempts++;
+            
+            if (userGuess === targetNumber) {
+                $('#result').text('恭喜你!你在第 ' + attempts + ' 次猜中了正確的數字!');
+                $('#guessInput').prop('disabled', true);
+            } else if (userGuess < targetNumber) {
+                $('#result').text('你猜的數字太低了,再試一次。');
+            } else {
+                $('#result').text('你猜的數字太高了,再試一次。');
+            }
+            
+            $('#guessInput').val('');
+        }
+    </script>
+</body>
+</html>
